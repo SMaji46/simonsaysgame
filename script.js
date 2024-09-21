@@ -3,18 +3,19 @@ var buttonColors = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
 var started = false;
-var level = -1;
+var level = 0;
 let max=0;
 // Start the game when any key is pressed
 $(document).keydown(function() {
   if (!started) {
-    nextSequence();
     started = true;
+    nextSequence();
   }
 });
 
 // When a button is clicked
 $(".button").click(function() {
+    if (started) {
   var userChosenColor = $(this).attr("id");
   userClickedPattern.push(userChosenColor);
 
@@ -22,12 +23,11 @@ $(".button").click(function() {
   animatePress(userChosenColor);
 
   checkAnswer(userClickedPattern.length - 1);
-});
+}});
 
 // Function to generate the next sequence
 function nextSequence() {
   userClickedPattern = [];
-  level++;
   max=Math.max(max,level);
   $("#level-title").text("Level " + level);
   h2=document.querySelector("h2");
@@ -47,6 +47,7 @@ function nextSequence() {
 function checkAnswer(currentLevel) {
   if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
     if (userClickedPattern.length === gamePattern.length) {
+        level++;
       setTimeout(function() {
         nextSequence();
       }, 1000);
@@ -63,7 +64,7 @@ function checkAnswer(currentLevel) {
 
 // Function to restart the game
 function startOver() {
-  level = -1;
+  level = 0;
   gamePattern = [];
   started = false;
 }
