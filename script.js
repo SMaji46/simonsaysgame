@@ -1,11 +1,11 @@
-// Initialize variables
+
 var buttonColors = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
 var started = false;
 var level = 0;
 let max=0;
-// Start the game when any key is pressed
+
 $(document).keydown(function() {
   if (!started) {
     started = true;
@@ -25,7 +25,7 @@ $(".button").click(function() {
   checkAnswer(userClickedPattern.length - 1);
 }});
 
-// Function to generate the next sequence
+// generate the next sequence
 function nextSequence() {
   userClickedPattern = [];
   max=Math.max(max,level);
@@ -43,7 +43,6 @@ function nextSequence() {
   playSound(randomChosenColor);
 }
 
-// Function to check the player's answer
 function checkAnswer(currentLevel) {
   if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
     if (userClickedPattern.length === gamePattern.length) {
@@ -61,21 +60,17 @@ function checkAnswer(currentLevel) {
     startOver();
   }
 }
-
-// Function to restart the game
 function startOver() {
   level = 0;
   gamePattern = [];
   started = false;
 }
 
-// Function to play sound based on color
 function playSound(name) {
   var audio = new Audio("sounds/" + name + ".mp3");
   audio.play();
 }
 
-// Function to animate button press
 function animatePress(currentColor) {
   $("#" + currentColor).addClass("userFlash");
   setTimeout(function() {

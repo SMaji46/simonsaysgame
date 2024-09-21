@@ -39,7 +39,6 @@
     cursor: pointer;
     border-radius: 50%;
     border: 10px solid #212121;
-    transition: transform 0.1s;
   }
   
   h1{
